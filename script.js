@@ -21,8 +21,8 @@ class UI {
         row.innerHTML = `
             <td>${book.title}</td>
             <td>${book.author}</td>
-            <td>${book.url}</td>
-            <td><i class="fas fa-trash fa-fw delete"></i></td>
+            <td><a href="${book.url}">Link</a></td>
+            <td><button class="btn btn-danger btn-sm danger"><i class="icon fas fa-trash fa-fw delete"></i></button></td>
         `;
 
         list.appendChild(row);
@@ -30,6 +30,8 @@ class UI {
 
     static deleteBook(el) {
         if(el.classList.contains('delete')) {
+            el.parentElement.parentElement.parentElement.remove();
+        } else if(el.closest('.danger')) {
             el.parentElement.parentElement.remove();
         }
     }
@@ -102,7 +104,12 @@ document.querySelector('#book-form').addEventListener('submit',(e) => {
 });
 
 document.querySelector('#book-list').addEventListener('click', (e) => {
-    UI.deleteBook(e.target);
-    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
-    UI.showAlert('Book Removed','info');
+    if (e.target.classList.contains('delete') || e.target.closest('.danger')) {
+        const row = e.target.closest('tr');        
+        const link = row.querySelector('a');
+        const href = link ? link.getAttribute('href') : null;
+        UI.deleteBook(e.target);
+        Store.removeBook(href);
+        UI.showAlert('Book Removed','info');
+    }
 });
