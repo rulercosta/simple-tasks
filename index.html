@@ -2,43 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Wishlist</title>
-    <script src="https://kit.fontawesome.com/f910748635.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro.css">
+    <link rel="stylesheet" href="./static/styles.css">
+    
+    <meta name="theme-color" content="#F2F2F7">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Tasks">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="./static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./static/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="./static/apple-touch-icon.png">
+    <link rel="manifest" href="./static/manifest.json">
+    
+    <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-2048-2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-1668-2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-1536-2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-1125-2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="display-4 text-center mt-5 mb-5">
-            <i class="fas fa-book-open text-primary"></i>My<span class="text-primary">Book</span>List</h1>
-        <form id="book-form" class="mt-5">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="title" class="form-control">
+    <div class="container">
+        <header class="header">
+            <div class="title-row">
+                <h1>Tasks</h1>
+                <button class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
             </div>
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" id="author" class="form-control">
+            <div class="controls">
+                <input type="search" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="Search tasks"
+                       aria-label="Search tasks">
             </div>
-            <div class="form-group">
-                <label for="url">URL</label>
-                <input type="text" id="url" class="form-control">
-            </div>
-            <input type="submit" value="Add Book" class="btn btn-primary btn-block mt-5">
-        </form>
-        <table class="table table-striped mt-5">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>URL</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="book-list"></tbody>
-        </table>
+        </header>
+
+        <div class="section-header-row">
+            <h2 class="section-header">My Tasks</h2>
+            <div class="task-count" id="taskCount">0 tasks</div>
+        </div>
+        <div class="task-list" id="taskList">
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <nav class="bottom-nav">
+        <button class="clear-btn" id="clearCompleted">Clear Completed</button>
+        <div class="segmented-control" role="group" aria-label="Filter tasks">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+    </nav>
+
+    <button class="add-button" id="addButton">+</button>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <span class="modal-title">New Task</span>
+                <button class="modal-close" id="modalClose">Cancel</button>
+            </div>
+            <form autocomplete="off" 
+                  onsubmit="return false;" 
+                  name="noautocomplete" 
+                  data-form-type="other">
+                <input type="search" 
+                       class="modal-input" 
+                       id="taskInput" 
+                       placeholder="Enter task"
+                       autocomplete="none"
+                       data-form-type="other"
+                       spellcheck="false">
+                <button type="button" class="modal-submit" id="modalSubmit">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="confirm-dialog-overlay" id="confirmDialogOverlay">
+        <div class="confirm-dialog">
+            <div class="confirm-dialog-title">Clear Completed Tasks</div>
+            <div class="confirm-dialog-message">Are you sure you want to clear all completed tasks?</div>
+            <div class="confirm-dialog-buttons">
+                <button class="confirm-dialog-button cancel" id="confirmDialogCancel">Cancel</button>
+                <button class="confirm-dialog-button confirm" id="confirmDialogConfirm">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./static/script.js"></script>
 </body>
 </html>
