@@ -1,3 +1,0 @@
-# simple-wishlist
-
-Simple Wishlist
