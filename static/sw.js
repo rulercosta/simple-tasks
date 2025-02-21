@@ -1,10 +1,10 @@
 const CACHE_NAME = 'tasks-app-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/static/styles.css',
-  '/static/script.js',
-  '/static/manifest.json',
+  './',
+  './index.html',
+  './static/styles.css',
+  './static/script.js',
+  './static/manifest.json',
   'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro.css',
   'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Regular.woff2',
   'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Medium.woff2',
