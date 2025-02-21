@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tasks</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro.css">
-    <link rel="stylesheet" href="./static/styles.css">
+    <link rel="stylesheet" href="./static/styles.css" id="app-styles" disabled>
     
     <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -25,73 +25,80 @@
     <link rel="apple-touch-startup-image" href="./static/splash/apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="title-row">
-                <h1>Tasks</h1>
-                <button class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
-            </div>
-            <div class="controls">
-                <input type="search" 
-                       class="search-input" 
-                       id="searchInput" 
-                       placeholder="Search tasks"
-                       aria-label="Search tasks">
-            </div>
-        </header>
+    <div id="app-container" style="display: none;">
+        <div class="container">
+            <header class="header">
+                <div class="title-row">
+                    <h1>Tasks</h1>
+                    <button class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"></button>
+                </div>
+                <div class="controls">
+                    <input type="search" 
+                           class="search-input" 
+                           id="searchInput" 
+                           placeholder="Search tasks"
+                           aria-label="Search tasks">
+                </div>
+            </header>
 
-        <div class="section-header-row">
-            <h2 class="section-header">My Tasks</h2>
-            <div class="task-count" id="taskCount">0 tasks</div>
+            <div class="section-header-row">
+                <h2 class="section-header">My Tasks</h2>
+                <div class="task-count" id="taskCount">0 tasks</div>
+            </div>
+            <div class="task-list" id="taskList">
+            </div>
         </div>
-        <div class="task-list" id="taskList">
+
+        <nav class="bottom-nav">
+            <button class="clear-btn" id="clearCompleted">Clear Completed</button>
+            <div class="segmented-control" role="group" aria-label="Filter tasks">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+        </nav>
+
+        <button class="add-button" id="addButton">+</button>
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal" id="modal">
+                <div class="modal-header">
+                    <span class="modal-title">New Task</span>
+                    <button class="modal-close" id="modalClose">Cancel</button>
+                </div>
+                <form autocomplete="off" 
+                      onsubmit="return false;" 
+                      name="noautocomplete" 
+                      data-form-type="other">
+                    <input type="search" 
+                           class="modal-input" 
+                           id="taskInput" 
+                           placeholder="Enter task"
+                           autocomplete="none"
+                           data-form-type="other"
+                           spellcheck="false">
+                    <button type="button" class="modal-submit" id="modalSubmit">Add Task</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="confirm-dialog-overlay" id="confirmDialogOverlay">
+            <div class="confirm-dialog">
+                <div class="confirm-dialog-title">Clear Completed Tasks</div>
+                <div class="confirm-dialog-message">Are you sure you want to clear all completed tasks?</div>
+                <div class="confirm-dialog-buttons">
+                    <button class="confirm-dialog-button cancel" id="confirmDialogCancel">Cancel</button>
+                    <button class="confirm-dialog-button confirm" id="confirmDialogConfirm">Clear</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <button class="clear-btn" id="clearCompleted">Clear Completed</button>
-        <div class="segmented-control" role="group" aria-label="Filter tasks">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="active">Active</button>
-            <button class="filter-btn" data-filter="completed">Completed</button>
-        </div>
-    </nav>
-
-    <button class="add-button" id="addButton">+</button>
-
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="modal">
-            <div class="modal-header">
-                <span class="modal-title">New Task</span>
-                <button class="modal-close" id="modalClose">Cancel</button>
-            </div>
-            <form autocomplete="off" 
-                  onsubmit="return false;" 
-                  name="noautocomplete" 
-                  data-form-type="other">
-                <input type="search" 
-                       class="modal-input" 
-                       id="taskInput" 
-                       placeholder="Enter task"
-                       autocomplete="none"
-                       data-form-type="other"
-                       spellcheck="false">
-                <button type="button" class="modal-submit" id="modalSubmit">Add Task</button>
-            </form>
-        </div>
+    <div id="readme-container" style="display: none;">
     </div>
 
-    <div class="confirm-dialog-overlay" id="confirmDialogOverlay">
-        <div class="confirm-dialog">
-            <div class="confirm-dialog-title">Clear Completed Tasks</div>
-            <div class="confirm-dialog-message">Are you sure you want to clear all completed tasks?</div>
-            <div class="confirm-dialog-buttons">
-                <button class="confirm-dialog-button cancel" id="confirmDialogCancel">Cancel</button>
-                <button class="confirm-dialog-button confirm" id="confirmDialogConfirm">Clear</button>
-            </div>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./static/environment.js"></script>
     <script src="./static/script.js"></script>
 </body>
 </html>
