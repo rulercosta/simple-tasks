@@ -2,7 +2,7 @@
   "name": "Tasks",
   "short_name": "Tasks",
   "description": "A simple and elegant task management app",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F2F2F7",
   "theme_color": "#F2F2F7",
