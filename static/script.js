@@ -43,11 +43,22 @@ class TodoList {
         document.body.classList.toggle('dark-mode', darkMode);
         this.themeToggle.setAttribute('aria-checked', darkMode);
         
+        // Update theme-color meta tag
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+            themeColor.content = darkMode ? '#000000' : '#F2F2F7';
+        }
+        
         this.themeToggle.addEventListener('click', () => {
             const isDarkMode = !document.body.classList.contains('dark-mode');
             document.body.classList.toggle('dark-mode', isDarkMode);
             localStorage.setItem('darkMode', isDarkMode);
             this.themeToggle.setAttribute('aria-checked', isDarkMode);
+            
+            // Update theme-color when theme toggles
+            if (themeColor) {
+                themeColor.content = isDarkMode ? '#000000' : '#F2F2F7';
+            }
         });
     }
 
