@@ -748,3 +748,41 @@ body.dark-mode .confirm-dialog-button:active {
 body.dark-mode .confirm-dialog-message {
     color: var(--system-gray-dark);
 }
+
+.empty-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+    color: var(--system-gray);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.empty-state-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.empty-state-subtitle {
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+body.dark-mode .empty-state {
+    color: var(--system-gray-dark);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
