@@ -95,13 +95,14 @@ body {
   top: 2px;
   height: 27px;
   width: 27px;
-  background: white;
+  background: var(--sun-color);
   border-radius: 50%;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body.dark-mode .theme-toggle::before {
   transform: translateX(20px);
+  background: var(--moon-color);
 }
 
 
