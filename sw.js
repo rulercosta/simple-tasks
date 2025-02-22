@@ -11,12 +11,7 @@ const ASSETS = [
   '/simple-tasks/static/apple-touch-icon.png',
   '/simple-tasks/static/favicon-32x32.png',
   '/simple-tasks/static/favicon-16x16.png',
-  '/simple-tasks/static/favicon.ico',
-  'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro.css',
-  'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Regular.woff2',
-  'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Medium.woff2',
-  'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Semibold.woff2',
-  'https://cdn.jsdelivr.net/npm/@ssense/sf-font@1.0.0/dist/SFPro-Bold.woff2'
+  '/simple-tasks/static/favicon.ico'
 ];
 
 self.addEventListener('install', (event) => {
