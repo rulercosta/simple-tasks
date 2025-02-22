@@ -188,7 +188,7 @@ class TodoList {
 
         this.tasks.push(task);
         this.saveTasks();
-        this.renderTask(task);
+        this.renderTasks();
         this.updateTaskCount();
     }
 
@@ -212,7 +212,7 @@ class TodoList {
     deleteTask(id) {
         this.tasks = this.tasks.filter(t => t.id !== id);
         this.saveTasks();
-        document.getElementById(`task-${id}`).remove();
+        this.renderTasks(); 
         this.updateTaskCount();
     }
 
@@ -265,7 +265,17 @@ class TodoList {
     renderTasks() {
         this.taskList.innerHTML = '';
         const filteredTasks = this.getFilteredTasks();
-        filteredTasks.forEach(task => this.renderTask(task));
+        const emptyState = document.getElementById('emptyState');
+        const taskListElement = document.getElementById('taskList');
+        
+        if (filteredTasks.length === 0) {
+            emptyState.style.display = 'flex';
+            taskListElement.style.display = 'none';
+        } else {
+            emptyState.style.display = 'none';
+            taskListElement.style.display = 'block';
+            filteredTasks.forEach(task => this.renderTask(task));
+        }
         
         const count = filteredTasks.length;
         this.taskCount.textContent = `${count} ${count === 1 ? 'task' : 'tasks'}`;
