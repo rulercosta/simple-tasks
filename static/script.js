@@ -463,12 +463,18 @@ const todoList = new TodoList();
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/static/sw.js')
-            .then((registration) => {
-                console.log('ServiceWorker registration successful');
+        const basePath = window.location.pathname.includes('simple-tasks') 
+            ? '/simple-tasks'
+            : '';
+        
+        navigator.serviceWorker.register(`${basePath}/sw.js`, {
+            scope: `${basePath}/`
+        })
+            .then(registration => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
             })
-            .catch((err) => {
-                console.log('ServiceWorker registration failed: ', err);
+            .catch(err => {
+                console.error('ServiceWorker registration failed: ', err);
             });
     });
 }
